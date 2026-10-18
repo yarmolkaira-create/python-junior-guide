@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подорож у світ Python & Програмування 🚀</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pyblue: '#306998',
+                        pyyellow: '#FFD43B',
+                        pydark: '#0F172A',
+                        pycard: '#1E293B',
+                        pyaccent: '#38BDF8',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(3deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.8, filter: 'drop-shadow(0 0 15px rgba(56, 189, 248, 0.5))' },
+                            '50%': { opacity: 1, filter: 'drop-shadow(0 0 25px rgba(255, 212, 59, 0.8))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+        
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38BDF8 0%, #FFD43B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-pydark text-slate-100 font-sans antialiased min-h-screen selection:bg-pyyellow selection:text-pydark">
+
+    <!-- Progress Indicator Bar -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-pyblue via-pyaccent to-pyyellow z-50 transition-all duration-150 w-0"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pyblue to-pyaccent flex items-center justify-center text-pyyellow text-xl font-bold shadow-lg shadow-pyblue/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-brands fa-python"></i>
+                </div>
+                <span class="font-extrabold text-lg sm:text-xl tracking-tight text-white">Python<span class="text-pyyellow">Junior</span></span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-300">
+                <a href="#what-is-program" class="hover:text-pyyellow transition-colors">Що таке програма?</a>
+                <a href="#why-python" class="hover:text-pyyellow transition-colors">Чому Python?</a>
+                <a href="#professions" class="hover:text-pyyellow transition-colors">Професії</a>
+                <a href="#ide" class="hover:text-pyyellow transition-colors">Де кодити?</a>
+                <a href="#playground" class="hover:text-pyyellow transition-colors flex items-center gap-1.5 text-pyaccent"><i class="fa-solid fa-code"></i> Пісочниця</a>
+                <a href="#quiz" class="px-4 py-2 rounded-xl bg-gradient-to-r from-pyblue to-pyaccent text-white font-bold hover:shadow-lg hover:shadow-pyblue/40 hover:-translate-y-0.5 transition-all">Вікторина 🏆</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#what-is-program" class="block py-2 text-slate-300 hover:text-pyyellow">Що таке програма?</a>
+            <a href="#why-python" class="block py-2 text-slate-300 hover:text-pyyellow">Чому Python?</a>
+            <a href="#professions" class="block py-2 text-slate-300 hover:text-pyyellow">Професії</a>
+            <a href="#ide" class="block py-2 text-slate-300 hover:text-pyyellow">Де кодити?</a>
+            <a href="#playground" class="block py-2 text-pyaccent font-semibold">Пісочниця Python</a>
+            <a href="#quiz" class="block text-center py-2.5 rounded-xl bg-gradient-to-r from-pyblue to-pyaccent text-white font-bold">Вікторина 🏆</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-pyblue/30 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-pyyellow/20 rounded-full blur-3xl -z-10"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-pyyellow">
+                    <span class="flex h-2 w-2 rounded-full bg-pyyellow animate-ping"></span>
+                    Перший крок у світ IT & Code
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Відкрий суперсилу <br>
+                    <span class="gradient-text">Програмування з Python!</span>
+                </h1>
+                <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Програмування — це як магія, але замість чарівної палички ти використовуєш код! Дізнайся, як створювати ігри, штучний інтелект та власні додатки вже сьогодні.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                    <a href="#playground" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-pyyellow via-amber-400 to-amber-500 text-pydark font-extrabold text-base shadow-xl shadow-pyyellow/20 hover:scale-105 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Спробувати код зараз
+                    </a>
+                    <a href="#what-is-program" class="px-7 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-base border border-slate-700 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-compass"></i> Почати подорож
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center">
+                <div class="w-full max-w-md p-6 glass-panel rounded-3xl border border-slate-700/60 shadow-2xl relative">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-700/60 pb-3">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">my_first_script.py</span>
+                    </div>
+                    
+                    <pre class="font-mono text-sm leading-relaxed text-slate-200 overflow-x-auto p-2"><code><span class="text-purple-400">import</span> world
+
+<span class="text-slate-400"># Створюємо майбутнє!</span>
+<span class="text-pyaccent">user</span> = <span class="text-pyyellow">"Юний Кодер"</span>
+<span class="text-pyaccent">status</span> = <span class="text-pyyellow">"Готовий творити"</span>
+
+<span class="text-purple-400">if</span> status == <span class="text-pyyellow">"Готовий творити"</span>:
+    <span class="text-pyaccent">print</span>(<span class="text-emerald-400">f"Ласкаво просимо, {user}! 🚀"</span>)</code></pre>
+
+                    <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-pyblue to-slate-900 border border-pyaccent/40 rounded-2xl p-4 shadow-xl flex items-center gap-3 animate-float">
+                        <div class="text-4xl text-pyyellow">
+                            <i class="fa-brands fa-python animate-pulse-glow"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-white">Python Mascot</p>
+                            <p class="text-[10px] text-slate-400">Легкий та потужний!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: WHAT IS A PROGRAM -->
+    <section id="what-is-program" class="py-16 bg-slate-900/60 relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Фундамент IT: <span class="gradient-text">Основи</span></h2>
+                <p class="text-slate-400 mt-3 text-base">Розберемося з найважливішими поняттями простими словами</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-8 rounded-3xl glass-panel hover:border-pyblue/60 transition-all group relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-pyblue/20 border border-pyblue/40 flex items-center justify-center text-pyaccent text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Що таке програма?</h3>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        <strong class="text-pyyellow">Програма</strong> — це чіткий покроковий список інструкцій (або рецепт), який каже комп'ютеру, смартфону чи роботу, що саме потрібно зробити.
+                    </p>
+                    <div class="bg-slate-950/60 rounded-xl p-4 border border-slate-800">
+                        <p class="text-xs font-semibold text-slate-400 mb-2">💡 Аналогія з кулінарним рецептом:</p>
+                        <ol class="text-xs text-slate-300 space-y-1.5 list-decimal list-inside font-mono">
+                            <li>Взяти чашку і чайний пакетик</li>
+                            <li>Залити окропом</li>
+                            <li>Додати 1 ложку цукру</li>
+                            <li>Подати гарячий чай! ☕</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="p-8 rounded-3xl glass-panel hover:border-pyyellow/60 transition-all group relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-pyyellow/20 border border-pyyellow/40 flex items-center justify-center text-pyyellow text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Що таке мова програмування?</h3>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        Комп'ютери не розуміють людську мову (українську чи англійську). Вони розуміють лише нулі та одиниці (<code class="text-pyaccent">01001010</code>).
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        <strong class="text-pyyellow">Мова програмування</strong> — це спеціальний "місток" або перекладач між людиною та комп'ютером, який дозволяє нам писати команди зрозумілими словами.
+                    </p>
+                    <div class="bg-slate-950/60 rounded-xl p-3 flex items-center justify-between border border-slate-800 text-xs text-center">
+                        <span class="text-slate-300 font-bold">Людина 👤</span>
+                        <i class="fa-solid fa-arrow-right text-pyyellow"></i>
+                        <span class="text-pyaccent font-mono font-bold">Мова Python 🐍</span>
+                        <i class="fa-solid fa-arrow-right text-pyyellow"></i>
+                        <span class="text-emerald-400 font-mono">Комп'ютер 💻</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: WHY PYTHON -->
+    <section id="why-python" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="px-3.5 py-1 rounded-full bg-pyblue/20 border border-pyblue/40 text-pyaccent text-xs font-bold uppercase tracking-wider">Суперсили мови</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Чому всі обирають <span class="text-pyyellow">Python</span>? 🐍</h2>
+            <p class="text-slate-400 mt-2">Python — одна з найпопулярніших та найпростіших мов у світі!</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-pycard/80 p-6 rounded-2xl border border-slate-700/70 hover:border-pyaccent hover:-translate-y-1 transition-all">
+                <div class="text-3xl text-pyaccent mb-4"><i class="fa-solid fa-feather-pointed"></i></div>
+                <h4 class="text-xl font-bold text-white mb-2">Простий синтаксис</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Код на Python схожий на звичайні англійські речення. Менше складних символів — більше зрозумілості!
+                </p>
+            </div>
+
+            <div class="bg-pycard/80 p-6 rounded-2xl border border-slate-700/70 hover:border-pyyellow hover:-translate-y-1 transition-all">
+                <div class="text-3xl text-pyyellow mb-4"><i class="fa-solid fa-bolt"></i></div>
+                <h4 class="text-xl font-bold text-white mb-2">Універсальність</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    На Python можна створювати що завгодно: сайти, 3D-ігри, штучний інтелект та додатки для космосу.
+                </p>
+            </div>
+
+            <div class="bg-pycard/80 p-6 rounded-2xl border border-slate-700/70 hover:border-emerald-400 hover:-translate-y-1 transition-all">
+                <div class="text-3xl text-emerald-400 mb-4"><i class="fa-solid fa-users"></i></div>
+                <h4 class="text-xl font-bold text-white mb-2">Величезна спільнота</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Мільйони програмістів по всьому світу допомагають один одному та створюють готові безкоштовні бібліотеки.
+                </p>
+            </div>
+
+            <div class="bg-pycard/80 p-6 rounded-2xl border border-slate-700/70 hover:border-purple-400 hover:-translate-y-1 transition-all">
+                <div class="text-3xl text-purple-400 mb-4"><i class="fa-solid fa-brain"></i></div>
+                <h4 class="text-xl font-bold text-white mb-2">№1 для Штучного Інтелекту</h4>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    ChatGPT, голосові помічники та автопілоти в автомобілях працюють завдяки алгоритмам на Python!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PROFESSIONS -->
+    <section id="professions" class="py-16 bg-slate-900/60 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Ким ти можеш стати? 💼</h2>
+                <p class="text-slate-400 mt-3">Знання Python відкриває двері у найкрутіші професії майбутнього!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6 rounded-2xl glass-panel border border-slate-700/80 hover:border-cyan-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="p-3 rounded-xl bg-cyan-500/20 text-cyan-400 text-2xl"><i class="fa-solid fa-gamepad"></i></span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">GameDev</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Розробник ігор</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Створюй власні ігрові всесвіти, логіку персонажів, фізику руху та механіки за допомогою бібліотеки Pygame!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel border border-slate-700/80 hover:border-purple-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="p-3 rounded-xl bg-purple-500/20 text-purple-400 text-2xl"><i class="fa-solid fa-robot"></i></span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">AI & ML</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Інженер Штучного Інтелекту</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Навчай нейромережі розпізнавати обличчя, перекладати мови, генерувати картинки та спілкуватися як людина.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel border border-slate-700/80 hover:border-emerald-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="p-3 rounded-xl bg-emerald-500/20 text-emerald-400 text-2xl"><i class="fa-solid fa-globe"></i></span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">Web Dev</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Web-розробник</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Створюй серверну частину сучасних сайтів, соціальних мереж та онлайн-магазинів.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: IDEs -->
+    <section id="ide" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="px-3.5 py-1 rounded-full bg-pyyellow/20 border border-pyyellow/40 text-pyyellow text-xs font-bold uppercase tracking-wider">Інструменти кодера</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Де пишуть код? (IDE) 🛠️</h2>
+            <p class="text-slate-400 mt-2">Середовище розробки (IDE) — це як робочий стіл або зошит для програміста</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-pyyellow transition-all">
+                <div class="w-12 h-12 rounded-xl bg-pyyellow/20 flex items-center justify-center text-pyyellow text-2xl font-bold mb-4">💡</div>
+                <h3 class="text-xl font-bold text-white mb-1">Thonny</h3>
+                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-400 mb-3">Найкраще для новачків</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Просте середовище, розроблене спеціально для вивчення Python у школі.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-pyblue transition-all">
+                <div class="w-12 h-12 rounded-xl bg-pyblue/20 flex items-center justify-center text-pyaccent text-2xl font-bold mb-4">🚀</div>
+                <h3 class="text-xl font-bold text-white mb-1">PyCharm</h3>
+                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-pyblue/30 text-pyaccent mb-3">Професійний вибір</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Потужне середовище для великих проєктів із розширеними підказками коду.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-purple-400 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl font-bold mb-4">🐍</div>
+                <h3 class="text-xl font-bold text-white mb-1">IDLE</h3>
+                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-300 mb-3">Стандартне</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Встановлюється автоматично разом із Python. Легке та без зайвих налаштувань.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-400 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl font-bold mb-4">🌐</div>
+                <h3 class="text-xl font-bold text-white mb-1">Replit / Online</h3>
+                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-cyan-500/20 text-cyan-400 mb-3">Прямо в браузері</span>
+                <p class="text-slate-400 text-sm leading-relaxed">Дозволяє писати та запускати код Python онлайн на будь-якому пристрої.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PLAYGROUND -->
+    <section id="playground" class="py-16 bg-slate-900/80 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-bold uppercase tracking-wider">Практика</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Інтерактивна Пісочниця Python 🎮</h2>
+                <p class="text-slate-400 mt-2">Обирай команду, дивись як виглядає код та запускай його виконання!</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-4 space-y-3">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">Обери приклади коду:</p>
+
+                    <button onclick="loadCode('hello', event)" id="btn-hello" class="playground-btn w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl text-pyyellow">👋</span>
+                            <div>
+                                <p class="text-sm font-bold text-white">1. Сказати Привіт</p>
+                                <p class="text-xs text-slate-400">Вивід тексту на екран</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="loadCode('math', event)" id="btn-math" class="playground-btn w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl text-pyaccent">🧮</span>
+                            <div>
+                                <p class="text-sm font-bold text-white">2. Порахувати 2 + 2</p>
+                                <p class="text-xs text-slate-400">Математичні обчислення</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="loadCode('shape', event)" id="btn-shape" class="playground-btn w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl text-purple-400">⭐</span>
+                            <div>
+                                <p class="text-sm font-bold text-white">3. Намалювати візерунок</p>
+                                <p class="text-xs text-slate-400">Цикли та символи</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="loadCode('game', event)" id="btn-game" class="playground-btn w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl text-emerald-400">🎯</span>
+                            <div>
+                                <p class="text-sm font-bold text-white">4. Гра "Вгадай число"</p>
+                                <p class="text-xs text-slate-400">Умови (if / else)</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden">
+                        <div class="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                <span id="editor-filename" class="ml-2 text-xs font-mono text-slate-400">script.py</span>
+                            </div>
+                            <button onclick="runCode()" class="px-4 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
+                                <i class="fa-solid fa-play"></i> Запустити код
+                            </button>
+                        </div>
+                        <div class="p-4 font-mono text-sm min-h-[160px] bg-slate-950/90 text-slate-200 overflow-x-auto" id="code-display"></div>
+                    </div>
+
+                    <div class="rounded-2xl bg-slate-950 border border-slate-800 shadow-xl overflow-hidden">
+                        <div class="px-4 py-2 bg-slate-900/60 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
+                            <span><i class="fa-solid fa-terminal text-pyyellow mr-1"></i> Консоль виводу (Terminal Output)</span>
+                            <span id="run-status" class="text-slate-500">Очікування запуску...</span>
+                        </div>
+                        <div id="console-output" class="p-4 font-mono text-sm min-h-[120px] text-emerald-400 bg-black/80 flex flex-col justify-start">
+                            <span class="text-slate-500">// Натисни "Запустити код", щоб побачити результат...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: QUIZ -->
+    <section id="quiz" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="p-8 sm:p-12 rounded-3xl glass-panel border border-slate-700/80 relative overflow-hidden shadow-2xl">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="px-3 py-1 rounded-full bg-pyyellow/20 text-pyyellow text-xs font-bold uppercase tracking-wider">Перевірка знань</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Вікторина: Перевір свої знання! 🏆</h2>
+                <p class="text-slate-400 mt-2 text-sm">Дай відповіді на 4 запитання та дізнайся свій рівень!</p>
+            </div>
+
+            <div id="quiz-container" class="space-y-8">
+                <!-- Q1 -->
+                <div class="quiz-step bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4">1. Що таке програма?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(1, false, this)" class="q-btn-1 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">А) Спеціальна деталь всередині монітора</button>
+                        <button onclick="checkAnswer(1, true, this)" class="q-btn-1 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">Б) Покрокова інструкція для комп'ютера</button>
+                        <button onclick="checkAnswer(1, false, this)" class="q-btn-1 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">В) Комп'ютерна мишка нового покоління</button>
+                        <button onclick="checkAnswer(1, false, this)" class="q-btn-1 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">Г) Пошуковий сайт у інтернеті</button>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="quiz-step bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4">2. Яка команда у Python виводить текст на екран?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(2, false, this)" class="q-btn-2 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all font-mono">А) say("Привіт")</button>
+                        <button onclick="checkAnswer(2, true, this)" class="q-btn-2 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all font-mono">Б) print("Привіт")</button>
+                        <button onclick="checkAnswer(2, false, this)" class="q-btn-2 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all font-mono">В) write("Привіт")</button>
+                        <button onclick="checkAnswer(2, false, this)" class="q-btn-2 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all font-mono">Г) show("Привіт")</button>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="quiz-step bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4">3. Яке середовище (IDE) рекомендують новачкам?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(3, true, this)" class="q-btn-3 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">А) Thonny</button>
+                        <button onclick="checkAnswer(3, false, this)" class="q-btn-3 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">Б) Photoshop</button>
+                        <button onclick="checkAnswer(3, false, this)" class="q-btn-3 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">В) MS Paint</button>
+                        <button onclick="checkAnswer(3, false, this)" class="q-btn-3 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">Г) Calculator</button>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="quiz-step bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4">4. Де застосовується Python?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(4, false, this)" class="q-btn-4 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">А) Тільки для ігор</button>
+                        <button onclick="checkAnswer(4, false, this)" class="q-btn-4 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">Б) Тільки для сайтів</button>
+                        <button onclick="checkAnswer(4, true, this)" class="q-btn-4 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">В) Штучний інтелект, ігри, веб-сайти та робототехніка</button>
+                        <button onclick="checkAnswer(4, false, this)" class="q-btn-4 text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition-all">Г) Ніде</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Results Banner -->
+            <div id="quiz-result" class="hidden mt-8 p-6 rounded-2xl bg-gradient-to-r from-pyblue/40 to-pyyellow/20 border border-pyyellow/50 text-center space-y-3">
+                <h3 class="text-2xl font-extrabold text-white">Твій результат: <span id="quiz-score" class="text-pyyellow">0</span> / 4! 🎉</h3>
+                <p id="quiz-feedback" class="text-slate-200 text-sm"></p>
+                <button onclick="resetQuiz()" class="mt-2 px-6 py-2.5 rounded-xl bg-pyyellow text-pydark font-bold hover:bg-amber-400 transition-all text-sm">
+                    Спробувати ще раз 🔄
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-10 text-center text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <i class="fa-brands fa-python text-pyyellow text-xl"></i>
+                <span class="font-bold text-white">Python Junior Explorer</span>
+            </div>
+            <p>© Інтерактивний навчальний онлайн-посібник для школярів.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT CODE -->
+    <script>
+        // Progress Bar Scroll Handler
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // Mobile Nav Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Playground Presets Data
+        const codeExamples = {
+            hello: {
+                filename: 'hello.py',
+                code: `<span class="text-slate-400"># Виводимо теплий привіт у консоль</span>\n<span class="text-purple-400">print</span>(<span class="text-emerald-400">"Привіт, юний програміст! 👋"</span>)\n<span class="text-purple-400">print</span>(<span class="text-emerald-400">"Вітаємо у світі Python!"</span>)`,
+                output: `Привіт, юний програміст! 👋\nВітаємо у світі Python!`
+            },
+            math: {
+                filename: 'calculator.py',
+                code: `<span class="text-slate-400"># Математичні обчислення в Python</span>\n<span class="text-pyaccent">a</span> = <span class="text-pyyellow">2</span>\n<span class="text-pyaccent">b</span> = <span class="text-pyyellow">2</span>\n<span class="text-pyaccent">sum_result</span> = a + b\n\n<span class="text-purple-400">print</span>(<span class="text-emerald-400">f"Результат додавання 2 + 2 = {sum_result}"</span>)\n<span class="text-purple-400">print</span>(<span class="text-emerald-400">f"А якщо помножити 5 * 5 = {5 * 5}"</span>)`,
+                output: `Результат додавання 2 + 2 = 4\nА якщо помножити 5 * 5 = 25`
+            },
+            shape: {
+                filename: 'pattern.py',
+                code: `<span class="text-slate-400"># Малюємо фігуру зі зірочок за допомогою циклу</span>\n<span class="text-purple-400">for</span> i <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-pyyellow">1</span>, <span class="text-pyyellow">6</span>):\n    <span class="text-purple-400">print</span>(<span class="text-emerald-400">"⭐ "</span> * i)`,
+                output: `⭐ \n⭐ ⭐ \n⭐ ⭐ ⭐ \n⭐ ⭐ ⭐ ⭐ \n⭐ ⭐ ⭐ ⭐ ⭐`
+            },
+            game: {
+                filename: 'guess_game.py',
+                code: `<span class="text-slate-400"># Проста логіка вгадування числа</span>\n<span class="text-pyaccent">secret_number</span> = <span class="text-pyyellow">7</span>\n<span class="text-pyaccent">user_guess</span> = <span class="text-pyyellow">7</span>\n\n<span class="text-purple-400">if</span> user_guess == secret_number:\n    <span class="text-purple-400">print</span>(<span class="text-emerald-400">"🎉 Перемога! Ти вгадав секретне число 7!"</span>)\n<span class="text-purple-400">else</span>:\n    <span class="text-purple-400">print</span>(<span class="text-emerald-400">"❌ Не вгадав, спробуй ще раз!"</span>)`,
+                output: `🎉 Перемога! Ти вгадав секретне число 7!`
+            }
+        };
+
+        let currentPreset = 'hello';
+
+        function loadCode(key, event) {
+            currentPreset = key;
+            const example = codeExamples[key];
+            
+            document.getElementById('editor-filename').innerText = example.filename;
+            document.getElementById('code-display').innerHTML = example.code;
+            
+            const consoleBox = document.getElementById('console-output');
+            consoleBox.innerHTML = `<span class="text-slate-500">// Код завантажено. Натисни "Запустити код"!</span>`;
+            document.getElementById('run-status').innerText = 'Готовий до запуску';
+            document.getElementById('run-status').className = 'text-slate-400';
+
+            document.querySelectorAll('.playground-btn').forEach(btn => {
+                btn.classList.remove('border-pyyellow', 'bg-slate-700/80');
+            });
+
+            let activeBtn = null;
+            if (event && event.currentTarget) {
+                activeBtn = event.currentTarget;
+            } else {
+                activeBtn = document.getElementById(`btn-${key}`);
+            }
+
+            if (activeBtn) {
+                activeBtn.classList.add('border-pyyellow', 'bg-slate-700/80');
+            }
+        }
+
+        function runCode() {
+            const consoleBox = document.getElementById('console-output');
+            const statusBox = document.getElementById('run-status');
+            
+            statusBox.innerText = 'Виконання...';
+            statusBox.className = 'text-pyyellow animate-pulse';
+            consoleBox.innerHTML = `<span class="text-slate-400">Running ${codeExamples[currentPreset].filename}...</span>`;
+
+            setTimeout(() => {
+                statusBox.innerText = 'Успішно виконано';
+                statusBox.className = 'text-emerald-400';
+                consoleBox.innerHTML = codeExamples[currentPreset].output.replace(/\n/g, '<br>');
+            }, 600);
+        }
+
+        // Quiz Logic
+        const userAnswers = { 1: null, 2: null, 3: null, 4: null };
+
+        function checkAnswer(questionNum, isCorrect, btnElement) {
+            userAnswers[questionNum] = isCorrect;
+            
+            const siblingButtons = document.querySelectorAll(`.q-btn-${questionNum}`);
+            siblingButtons.forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'bg-red-600', 'text-white', 'border-emerald-400', 'border-red-400');
+                btn.disabled = true;
+            });
+
+            if (isCorrect) {
+                btnElement.classList.add('bg-emerald-600', 'text-white', 'border-emerald-400');
+            } else {
+                btnElement.classList.add('bg-red-600', 'text-white', 'border-red-400');
+            }
+
+            // Check if all answered
+            if (Object.values(userAnswers).every(ans => ans !== null)) {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            const score = Object.values(userAnswers).filter(Boolean).length;
+            document.getElementById('quiz-score').innerText = score;
+            
+            const feedback = document.getElementById('quiz-feedback');
+            if (score === 4) {
+                feedback.innerText = 'Супер! Ти справжній майбутній Senior Python Developer! 🌟';
+            } else if (score >= 2) {
+                feedback.innerText = 'Чудовий результат! Більшість матеріалу засвоєно чудово! 💪';
+            } else {
+                feedback.innerText = 'Не засмучуйся, перечитай розділи сайту та спробуй ще раз! 🚀';
+            }
+
+            document.getElementById('quiz-result').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            for (let key in userAnswers) {
+                userAnswers[key] = null;
+            }
+            
+            document.querySelectorAll('#quiz-container button').forEach(btn => {
+                btn.disabled = false;
+                btn.className = btn.className.replace(/bg-(emerald|red)-600|text-white|border-(emerald|red)-400/g, '');
+                btn.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-slate-200');
+            });
+
+            document.getElementById('quiz-result').classList.add('hidden');
+        }
+
+        // Initialize default code preset on page load
+        window.onload = function() {
+            loadCode('hello');
+        };
+    </script>
+</body>
+</html>
